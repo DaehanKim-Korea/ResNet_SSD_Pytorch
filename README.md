@@ -41,7 +41,7 @@ python resnet_reducefc.py --choice resnet101 / python3 resnet_reducefc.py resnet
 -----------------------------------------------------------------------------------
 # If you want to use vgg(backbone),
 
-cd weights && mkdir vgg_pretrained_reducefc && cd vgg_pretrained_rmfc && cd vgg_pretrained_reducefc
+cd weights && mkdir vgg_pretrained_reducefc && cd vgg_pretrained_rmfc
 wget https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
 ```
 
@@ -63,8 +63,7 @@ python train.py / python3 train.py
 |**paper_vgg**|77.2|
 |**reop_vgg** |77.xxx|
 
-## 
-
+##  This regpo is 1.1 map higher than DSSD paper [(resnet-101)SSD 321 ] The experimental environment may be different.
 | backbone + SSD |map|
 |------|---|
 |**resnet18**|70.4|
