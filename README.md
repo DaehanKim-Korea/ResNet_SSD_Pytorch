@@ -48,7 +48,7 @@ wget https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
 ## Step 03
 
 ```
-cd ../../ && vim config.py
+cd ../ && vim config.py
 
 ### next Modify config.py for your condition.
 
