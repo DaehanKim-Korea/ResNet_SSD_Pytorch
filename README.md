@@ -12,32 +12,39 @@ git clone https://github.com/modernkim/ResNet_SSD_Pytorch.git
 
 cd ResNet_SSD_Pytorch
 
+cd data && mkdir VOCdataset && cd VOCdataset && mkdir VOC_train_val && mkdir VOC_test
+
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar
 
-tar xvf VOCtrainval_06-Nov-2007.tar -C ./data/VOC_trian_val
-tar xvf VOCtrainval_11-May-2012.tar -C ./data/VOC_trian_val
-tar xvf VOCtest_06-Nov-2007.tar -C ./data/VOC_test
+tar xvf VOCtrainval_06-Nov-2007.tar -C ./VOC_trian_val/
+tar xvf VOCtrainval_11-May-2012.tar -C ./VOC_trian_val/
+tar xvf VOCtest_06-Nov-2007.tar -C ./VOC_test/
 ```
 
 ## Step 02
 
 ```
-cd load_pretrained_weight
+cd ../../ && mkdir weights && cd weights && mkdir torchvision_resnet_reducefc && cd ../
 
-python resnet_reducefc.py --choice resnet18 / python3 resnet_reducefc.py resnet34
+cd lib
+
+#your choice
+
+python resnet_reducefc.py --choice resnet18 / python3 resnet_reducefc.py resnet18
 python resnet_reducefc.py --choice resnet34 / python3 resnet_reducefc.py resnet34
 python resnet_reducefc.py --choice resnet50 / python3 resnet_reducefc.py resnet50
 python resnet_reducefc.py --choice resnet101 / python3 resnet_reducefc.py resnet101
-
-cd ../ && vim config.py
 ```
-### next Modify config.py for your condition.
 
 ## Step 03
 
 ```
+cd ../ && vim config.py
+
+### next Modify config.py for your condition.
+
 python train.py / python3 train.py
 ```
 ## 

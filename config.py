@@ -28,9 +28,9 @@ class Config:
     lr_scheduler_start_epoch = 60
     
     save_folder = 'weights/'
-    backbone_network_name = 'resnet_50'
+    backbone_network_name = 'resnet_18'
     exp_information_name = 'dummy_exp'
-    basenet = 'torchvision_pretrained_rmfc/resnet18.pth'
+    basenet = 'torchvision_pretrained_resnet_rmfc/resnet18.pth'
 
     log_fn = 10 
     neg_radio = 3

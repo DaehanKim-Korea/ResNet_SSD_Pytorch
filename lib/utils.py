@@ -33,7 +33,8 @@ def bbox_iou(box_a, box_b):
     m = box_a.shape[0]
     n = box_b.shape[0]
 
-    # Broadcasting, doing the equivalent of (m, 1, 2) and (1, n, 2) operations and finally getting (m, n, 2) size    tl = np.maximum(box_a[:, None, :2], box_b[None, :, :2])
+    # Broadcasting, doing the equivalent of (m, 1, 2) and (1, n, 2) operations and finally getting (m, n, 2) size    
+    tl = np.maximum(box_a[:, None, :2], box_b[None, :, :2])
     br = np.minimum(box_a[:, None, 2:], box_b[None, :, 2:])
 
     wh = np.maximum(br-tl, 0)

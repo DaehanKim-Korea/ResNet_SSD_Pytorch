@@ -9,15 +9,14 @@ import torch.nn.functional as F
 import torch.backends.cudnn as cudnn
 
 from config import opt
+from lib.network_vgg import VGG_SSD
 from collections import OrderedDict
-from data.voc_data_loader import VOCDetection
 from lib.ssd_loss import MultiBoxLoss
 from lib.utils import detection_collate
-from scheduler import GradualWarmupScheduler
+from lib.network_resnet import RESNET_SSD
+from data.voc_train_data_loader import VOCDetection
+from lib.scheduler import GradualWarmupScheduler
 from lib.multibox_encoder import MultiBoxEncoder
-
-from lib.vgg_model import VGG_SSD
-from lib.resnet_model import RESNET_SSD
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -69,7 +68,7 @@ if __name__ == '__main__':
         model.ResNet.load_state_dict(pretrained_weights)
 
     model.to(device)
-    model = torch.nn.DataParallel(model)
+#     model = torch.nn.DataParallel(model)
     cudnn.benchmark = True
     model.train()
 
@@ -117,7 +116,7 @@ if __name__ == '__main__':
     
     print('start training........')
     for e in range(opt.epoch+1):
-        if e % opt.lr_reduce_epoch == 0:
+        if e == opt.lr_reduce_epoch:
             adjust_learning_rate(optimizer)
             
         total_loc_loss = 0

@@ -26,7 +26,7 @@ parser.add_argument('--save_folder',
 args = parser.parse_args()
 
 
-if args.chice == 'resnet18'
+if args.choice == 'resnet18':
     r18=model_zoo.load_url(model_urls['resnet18'])
     rr18=OrderedDict()
 
@@ -51,9 +51,9 @@ if args.chice == 'resnet18'
             r18[nk]=v
         print(i,nk,k)    
         
-    torch.save(r18, 'resnet18.pth') 
+    torch.save(r18, '../weights/torchvision_pretrained_resnet_rmfc/resnet18.pth') 
 
-elif args.choice == 'resnet34'
+elif args.choice == 'resnet34':
 
     r34=model_zoo.load_url(model_urls['resnet34'])
     rr34=OrderedDict()
@@ -79,9 +79,9 @@ elif args.choice == 'resnet34'
             r34[nk]=v
         print(i,nk,k)    
         
-    torch.save(r34, 'resnet34.pth') 
+    torch.save(r34, '../weights/torchvision_pretrained_resnet_rmfc/resnet34.pth') 
 
-elif args.chice == 'resnet50'
+elif args.choice == 'resnet50':
 
     r50=model_zoo.load_url(model_urls['resnet50'])
     rr50=OrderedDict()
@@ -107,9 +107,9 @@ elif args.chice == 'resnet50'
             r50[nk]=v
         print(i,nk,k)    
         
-    torch.save(r50, 'resnet50.pth') 
+    torch.save(r50, '../weights/torchvision_pretrained_resnet_rmfc/resnet50.pth') 
 
-elif args.chice == 'resnet101'
+elif args.choice == 'resnet101':
 
     r101=model_zoo.load_url(model_urls['resnet101'])
     rr101=OrderedDict()
@@ -135,4 +135,4 @@ elif args.chice == 'resnet101'
             r101[nk]=v
         print(i,nk,k)    
         
-    torch.save(r101, 'resnet101.pth') 
+    torch.save(r101, '../weights/torchvision_pretrained_resnet_rmfc/resnet101.pth') 

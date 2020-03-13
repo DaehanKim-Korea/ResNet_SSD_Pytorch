@@ -9,10 +9,10 @@ import torch.nn.functional as F
 from torchvision import models
 
 extract = {
-        'resnet_18': {'b':[7,9],'e':[4,6,8,10]}
-        'resnet_34': {'b':[10,16],'e':[4,6,8,10]}
-        'resnet_34': {'b':[10,16],'e':[4,6,8,10]}
-        'resnet_101': {'b':[10,33],'e':[4,6,8,10]}
+        'resnet_18': {'b':[7,9],'e':[4,6,8,10]},
+        'resnet_34': {'b':[10,16],'e':[4,6,8,10]},
+        'resnet_50': {'b':[10,16],'e':[4,6,8,10]},
+        'resnet_101': {'b':[10,33],'e':[4,6,8,10]},
     }
     
 class L2Norm(nn.Module):
@@ -63,28 +63,28 @@ def ResNet(model_mode):
                nn.ReLU(inplace=True),
                nn.MaxPool2d(kernel_size=3, stride=2, padding=1)]
 
-    if model_mode == 'resnet_18'
+    if model_mode == 'resnet_18':
         num_block = [2,2,2,2]
         block= torchvision.models.resnet.BasicBlock
         resnet += make_layers(block,cfg[1],cfg[1],num_block[0],stride=1)                 # 75 x 75 
         resnet += make_layers(block,cfg[1]*block.expansion,cfg[2],num_block[1],stride=2) # 38 x 38
         resnet += make_layers(block,cfg[2]*block.expansion,cfg[3],num_block[2],stride=2) # 19 x 19
         resnet += make_layers(block,cfg[3]*block.expansion,cfg[4],num_block[3],stride=2) # 10 x 10
-    if model_mode == 'resnet_34'
+    if model_mode == 'resnet_34':
         num_block = [3,4,6,3]
         block= torchvision.models.resnet.BasicBlock
         resnet += make_layers(block,cfg[1],cfg[1],num_block[0],stride=1)                 # 75 x 75 
         resnet += make_layers(block,cfg[1]*block.expansion,cfg[2],num_block[1],stride=2) # 38 x 38
         resnet += make_layers(block,cfg[2]*block.expansion,cfg[3],num_block[2],stride=2) # 19 x 19
         resnet += make_layers(block,cfg[3]*block.expansion,cfg[4],num_block[3],stride=2) # 10 x 10
-    if model_mode == 'resnet_50'
+    if model_mode == 'resnet_50':
         num_block = [3,4,6,3]
         block= torchvision.models.resnet.Bottleneck
         resnet += make_layers(block,cfg[1],cfg[1],num_block[0],stride=1)                 # 75 x 75 
         resnet += make_layers(block,cfg[1]*block.expansion,cfg[2],num_block[1],stride=2) # 38 x 38
         resnet += make_layers(block,cfg[2]*block.expansion,cfg[3],num_block[2],stride=2) # 19 x 19
         resnet += make_layers(block,cfg[3]*block.expansion,cfg[4],num_block[3],stride=2) # 10 x 10
-    if model_mode == 'resnet_101'
+    if model_mode == 'resnet_101':
         num_block = [3,4,23,3]
         block= torchvision.models.resnet.Bottleneck
         resnet += make_layers(block,cfg[1],cfg[1],num_block[0],stride=1)                 # 75 x 75 
@@ -98,7 +98,7 @@ def ResNet_Extra(model_mode):
     cfg = [128,256,512,1024,2048]
     layers = []
     
-    if model_mode == 'resnet_18'
+    if model_mode == 'resnet_18':
         extra_pool_01 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
         extra_conv_01 = nn.Conv2d(cfg[2], cfg[1], kernel_size=3, padding=6, dilation=6)
         extra_conv_02 = nn.Conv2d(cfg[1], cfg[3], kernel_size=1)
@@ -122,7 +122,7 @@ def ResNet_Extra(model_mode):
 
         layers = [extra_pool_01, extra_conv_01,extra_conv_02,extra_conv_03, extra_conv_04, extra_conv_05,extra_conv_06, extra_conv_07, extra_conv_08, extra_conv_09, extra_conv_10]
         
-    elif model_mode == 'resnet_34'
+    elif model_mode == 'resnet_34':
 
         extra_pool_01 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
         extra_conv_01 = nn.Conv2d(cfg[2], cfg[1], kernel_size=3, padding=6, dilation=6)
@@ -145,7 +145,7 @@ def ResNet_Extra(model_mode):
         extra_conv_10 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
 
         layers = [extra_pool_01, extra_conv_01,extra_conv_02,extra_conv_03, extra_conv_04, extra_conv_05,extra_conv_06, extra_conv_07, extra_conv_08, extra_conv_09, extra_conv_10]
-    elif model_mode == 'resnet_50'
+    elif model_mode == 'resnet_50':
         extra_pool_01 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
         extra_conv_01 = nn.Conv2d(cfg[4], cfg[2], kernel_size=3, padding=6, dilation=6)
         extra_conv_02 = nn.Conv2d(cfg[2], cfg[3], kernel_size=1)
@@ -168,7 +168,7 @@ def ResNet_Extra(model_mode):
         # 1 x 1
 
         layers = [extra_pool_01, extra_conv_01,extra_conv_02,extra_conv_03, extra_conv_04, extra_conv_05,extra_conv_06, extra_conv_07, extra_conv_08, extra_conv_09, extra_conv_10]
-    elif model_mode == 'resnet_101'
+    elif model_mode == 'resnet_101':
         extra_pool_01 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
         extra_conv_01 = nn.Conv2d(cfg[4], cfg[2], kernel_size=3, padding=6, dilation=6)
         extra_conv_02 = nn.Conv2d(cfg[2], cfg[3], kernel_size=1)
@@ -226,7 +226,7 @@ class RESNET_SSD(nn.Module):
         self.bboxes = bboxes
         self.model = model
 
-        if self.model = 'resnet_18':
+        if self.model == 'resnet_18':
             self.L2Norm = L2Norm(128, 20)
             self.ResNet_list = ResNet(self.model)
             self.extra_list = ResNet_Extra(self.model)
@@ -237,18 +237,18 @@ class RESNET_SSD(nn.Module):
             self.loc = nn.ModuleList(self.loc_layers_list)
             self.conf = nn.ModuleList(self.conf_layers_list)
             
-        elif self.model = 'resnet_34':
+        elif self.model == 'resnet_34':
             self.L2Norm = L2Norm(128, 20)
             self.ResNet_list = ResNet(self.model)
             self.extra_list = ResNet_Extra(self.model)
             self.loc_layers_list, self.conf_layers_list = Feature_extractor(self.model,self.ResNet_list, self.extra_list, self.bboxes, self.num_classes)
 
-            self.ResNet = nn.ModuleList(self.ResNet_list)
+            self.ResNet == nn.ModuleList(self.ResNet_list)
             self.extras = nn.ModuleList(self.extra_list)
             self.loc = nn.ModuleList(self.loc_layers_list)
             self.conf = nn.ModuleList(self.conf_layers_list)
 
-        elif self.model = 'resnet_50':
+        elif self.model == 'resnet_50':
             self.L2Norm = L2Norm(512, 20)
             self.ResNet_list = ResNet(self.model)
             self.extra_list = ResNet_Extra(self.model)
@@ -259,7 +259,7 @@ class RESNET_SSD(nn.Module):
             self.loc = nn.ModuleList(self.loc_layers_list)
             self.conf = nn.ModuleList(self.conf_layers_list)
 
-        elif self.model = 'resnet_101':
+        elif self.model == 'resnet_101':
             self.L2Norm = L2Norm(512, 20)
             self.ResNet_list = ResNet(self.model)
             self.extra_list = ResNet_Extra(self.model)
@@ -275,7 +275,7 @@ class RESNET_SSD(nn.Module):
         loc = []
         conf = []
 
-        if self.model=='resnet_18'
+        if self.model=='resnet_18':
             for k, v in enumerate(self.ResNet):
                 x = v(x)
                 if k==7 or k==9:
@@ -292,7 +292,7 @@ class RESNET_SSD(nn.Module):
                 if i==4 or i==6 or i==8 or i==10:
                     sources.append(x)
 
-        elif self.model=='resnet_34'
+        elif self.model=='resnet_34':
             for k, v in enumerate(self.ResNet):
                 x = v(x)
                 if k==10 or k==16:
@@ -309,7 +309,7 @@ class RESNET_SSD(nn.Module):
                 if i==4 or i==6 or i==8 or i==10:
                     sources.append(x)
 
-        elif self.model=='resnet_50'
+        elif self.model=='resnet_50':
             for k, v in enumerate(self.ResNet):
                 x = v(x)
                 if k==10 or k==16:
@@ -326,7 +326,7 @@ class RESNET_SSD(nn.Module):
                 if i==4 or i==6 or i==8 or i==10:
                     sources.append(x)
 
-        elif self.model=='resnet_101'
+        elif self.model=='resnet_101':
             for k, v in enumerate(self.ResNet):
                 x = v(x)
                 if k==10 or k==33:
