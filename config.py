@@ -3,8 +3,9 @@
 class Config:
 
 	# insert your VOCdevkit path
-    VOC_ROOT = './data/VOCdevkit'
-    
+    VOC_TRAIN_ROOT = './data/VOCdataset/VOC_train_val/VOCdevkit'
+    VOC_TEST_ROOT = './data/VOCdataset/VOC_test/VOCdevkit'
+
     num_classes = 21
     
     resume = None
@@ -14,7 +15,7 @@ class Config:
     # 'weights/pre_resnet_101_02/locloss_0.661_clsloss_1.801_total_loss_1279.111.pth'
     
     lr_scheduler = True
-    lr = 0.0001
+    lr = 0.001
     gamma = 0.2
     momentum = 0.9
     weight_decay = 5e-4
@@ -28,7 +29,7 @@ class Config:
     
     save_folder = 'weights/'
     backbone_network_name = 'resnet_50'
-    exp_information_name = 'dummy_folder'
+    exp_information_name = 'dummy_exp'
     basenet = 'torchvision_pretrained_rmfc/resnet18.pth'
 
     log_fn = 10 

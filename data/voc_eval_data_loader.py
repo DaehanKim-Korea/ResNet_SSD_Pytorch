@@ -1,10 +1,12 @@
 import os
+import sys
 import cv2
 import torch
+import numpy as np
 import torch.utils.data as data
 import xml.etree.ElementTree as ET
-import numpy as np
 
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from config import opt
 from lib.augmentations import preproc_for_test, preproc_for_train
 
@@ -39,7 +41,7 @@ class VOCDetection(data.Dataset):
     def __init__(self, opt, image_sets=[['2007', 'trainval'], ['2012', 'trainval']], is_train=True):
 
 
-        self.root = '/jupyter/VOCdevkit/'
+        self.root = opt.VOC_TEST_ROOT
         self.image_sets = image_sets
         self.is_train = is_train
         self.opt = opt    

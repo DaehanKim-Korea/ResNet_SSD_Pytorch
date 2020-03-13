@@ -15,8 +15,8 @@ from collections import OrderedDict
 from lib.ssd_loss import MultiBoxLoss
 from lib.resnet_model import RESNET_SSD
 from lib.utils import detection_collate
-from voc_eval_dataloader import VOC_LABELS
-from voc_eval_dataloader import VOCDetection
+from data.voc_eval_dataloader import VOC_LABELS
+from data.voc_eval_dataloader import VOCDetection
 from lib.augmentations import preproc_for_test
 from lib.multibox_encoder import MultiBoxEncoder
 
