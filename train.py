@@ -10,7 +10,7 @@ import torch.backends.cudnn as cudnn
 
 from config import opt
 from collections import OrderedDict
-from voc_dataset import VOCDetection
+from data.voc_data_loader import VOCDetection
 from lib.ssd_loss import MultiBoxLoss
 from lib.utils import detection_collate
 from scheduler import GradualWarmupScheduler
