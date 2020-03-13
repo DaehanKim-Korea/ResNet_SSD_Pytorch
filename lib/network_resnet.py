@@ -114,7 +114,7 @@ def ResNet_Extra(model_mode):
 
         extra_conv_07 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_08 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
-        # 5 x 5
+        # 3 x 3
 
         extra_conv_09 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_10 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
@@ -139,10 +139,11 @@ def ResNet_Extra(model_mode):
 
         extra_conv_07 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_08 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
-        # 5 x 5
+        # 3 x 3
 
         extra_conv_09 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_10 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
+        # 1 x 1
 
         layers = [extra_pool_01, extra_conv_01,extra_conv_02,extra_conv_03, extra_conv_04, extra_conv_05,extra_conv_06, extra_conv_07, extra_conv_08, extra_conv_09, extra_conv_10]
     elif model_mode == 'resnet_50':
@@ -161,7 +162,7 @@ def ResNet_Extra(model_mode):
 
         extra_conv_07 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_08 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
-        # 5 x 5
+        # 3 x 3
 
         extra_conv_09 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_10 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
@@ -184,7 +185,7 @@ def ResNet_Extra(model_mode):
 
         extra_conv_07 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_08 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
-        # 5 x 5
+        # 3 x 3
 
         extra_conv_09 = nn.Conv2d(cfg[1],cfg[0],kernel_size=1, stride=1)
         extra_conv_10 = nn.Conv2d(cfg[0],cfg[1],kernel_size=3, stride=1)
