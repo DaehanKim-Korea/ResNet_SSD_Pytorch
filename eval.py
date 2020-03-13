@@ -8,6 +8,7 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 import torch.nn.functional as F
 
+from config import opt
 from lib.utils import nms
 from lib.utils import detect
 from lib.voc_eval import voc_eval
@@ -22,7 +23,7 @@ from lib.multibox_encoder import MultiBoxEncoder
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', 
-                    default='weights/pre_resnet_101_03/locloss_0.651_clsloss_1.765_total_loss_627.728.pth',
+                    default='weights/your_xxxxx.pth',
                     type=str,
                     help='model checkpoint used to eval VOC dataset')
 
@@ -37,7 +38,7 @@ checkpoint = args.model
 
 device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 
-voc_root = '/jupyter/VOCdevkit' #   '/data/PASCAL'
+voc_root = opt.VOC_TEST_ROOT = './data/VOCdataset/VOC_test/VOCdevkit'
 annopath = os.path.join(voc_root, 'VOC2007', 'Annotations', "%s.xml")   
 imgpath = os.path.join(voc_root, 'VOC2007', 'JPEGImages', '%s.jpg')    
 imgsetpath = os.path.join(voc_root, 'VOC2007', 'ImageSets', 'Main', '{:s}.txt')   
@@ -46,22 +47,31 @@ cachedir = os.path.join( os.getcwd(), 'annotations_cache')
 if __name__ == '__main__': 
     
     print('using {} to eval, use cpu may take an hour to complete !!'.format(device))
+    
     # If you use vgg
-    # model.VGG.load_state_dict(pretrained_weights)
+    # model = VGG_SSD(opt.num_classes, opt.anchor_num)
 
     # If you use resnet
-    model.ResNet.load_state_dict(pretrained_weights)
+    model = RESNET_SSD(opt.backbone_network_name, opt.num_classes, opt.anchor_num)
 
     print('loading checkpoint from {}'.format(checkpoint))
     state_dict = torch.load(checkpoint, map_location=None if torch.cuda.is_available() else 'cpu')
     
+    # If DataParallel was used at the time of the train, activate the annotation below.    
+    
+    '''
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
         name = k[7:] # remove `module.`
         new_state_dict[name] = v
-    
     model.load_state_dict(new_state_dict)
-                            
+    '''
+    # If DataParallel is not used for train time, activate the annotation below.
+    
+    '''
+    model.load_state_dict(state_dict)
+    '''
+
     model.cuda()
     model = nn.DataParallel(model)
     model.eval()

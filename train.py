@@ -42,8 +42,12 @@ if __name__ == '__main__':
     if not os.path.exists(opt.save_folder):
         os.mkdir(opt.save_folder)
 
-    model = RESNET_SSD(opt.backbone_network_name, 21, [4,6,6,6,4,4])
-    
+    # If you use vgg
+    # model = VGG_SSD(opt.num_classes, opt.anchor_num)
+
+    # If you use resnet
+    model = RESNET_SSD(opt.backbone_network_name, opt.num_classes, opt.anchor_num)
+
     if opt.resume:
         print('loading checkpoint...')
         if opt.Data_Parallel == False:
@@ -62,7 +66,7 @@ if __name__ == '__main__':
         print('Loading base network...')
         
         # If you use vgg
-        # model.VGG.load_state_dict(pretrained_weights)
+        # model.vgg.load_state_dict(pretrained_weights)
 
         # If you use resnet
         model.ResNet.load_state_dict(pretrained_weights)
