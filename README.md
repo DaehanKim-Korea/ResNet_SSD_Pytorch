@@ -8,6 +8,10 @@ Paper backbone network (VGG) and custom backbone network (ResNet) are implemente
 ## Step 01
 
 ```
+git clone https://github.com/modernkim/ResNet_SSD_Pytorch.git
+
+cd ResNet_SSD_Pytorch
+
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar
@@ -16,11 +20,10 @@ tar xvf VOCtrainval_06-Nov-2007.tar -C ./data/VOC_trian_val
 tar xvf VOCtrainval_11-May-2012.tar -C ./data/VOC_trian_val
 tar xvf VOCtest_06-Nov-2007.tar -C ./data/VOC_test
 ```
+
 ## Step 02
 
 ```
-git clone 
-
 cd load_pretrained_weight
 
 python resnet_reducefc.py --choice resnet18 / python3 resnet_reducefc.py resnet34
